@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Planner</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h2>{{ username }}'s Planner</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Delete</th>
+            </tr>
+            {% for row in tasks %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    {% if row[2] == "completed" %}
+                        <td style="background-color: lightgreen">{{ row[2] }}</td>
+                        {% else %}
+                        <td> 
+                            <form action="{{ url_for('planner', username=username) }}" method="POST"> 
+                                <input type="hidden" name="complete">
+                                <input type="hidden" name="username" value="{{ username }}">
+                                <input type="hidden" name="date" value="{{ row[0] }}">
+                                <input type="hidden" name="task" value="{{ row[1] }}">
+                                <input class="submit" type="submit" value="Complete">
+                            </form>
+                        </td>
+                    {% endif %}
+                    <td> 
+                        <form action="{{ url_for('planner', username=username) }}" method="POST"> 
+                            <input type="hidden" name="delete">
+                            <input type="hidden" name="username" value="{{ username }}">
+                            <input type="hidden" name="date" value="{{ row[0] }}">
+                            <input type="hidden" name="task" value="{{ row[1] }}">
+                            <input class="submit" type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <form action="{{ url_for('planner', username=username) }}" method="POST">
+            <h2>Add new task: </h2>
+            <input type="hidden" name="add">
+            <h2>Date: <input name="date"></h2>
+            <h2>Task: <input name="task"></h2>
+            <h2><input type="submit"></h2>
+        </form>
+    </body>
+</html>

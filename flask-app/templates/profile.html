@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h2>Welcome {{ username }}</h2>
+        <img src="{{ url_for('get_directory', filename=filename) }}" alt="profile picture">
+        <div>
+            <form action="{{ url_for('profile', username=username) }}" method="POST" enctype="multipart/form-data">
+                <h2>Change profile picture: <input type="file" name="change"></h2>
+                <h2><input type="submit"></h2>
+            </form>
+        </div>
+        <h2><a href="{{ url_for('planner', username=username) }}">Planner</a></h2>
+        <h2><a href="{{ url_for('home') }}">Return to home</a></h2>
+    </body>
+</html>

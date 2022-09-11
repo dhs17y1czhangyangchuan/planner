@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Welcome</h1>
+        <h2>Please Login: </h2>
+        <div>
+            <form action="{{ url_for('home') }}" method="POST">
+                <h3>Username: <input name="username"></h3>
+                <h3>Password: <input name="password"></h3>
+                <h3><input type="submit"></h3>
+            </form>
+        </div>
+    </body>
+</html>
